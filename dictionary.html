@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dictionary - CHIROVOX</title>
   <link rel="stylesheet" href="css/style.css?v=1.1">
-  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <style>
     /* Premium header alignment for dictionary page */
     .page-header{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:20px;margin-bottom:20px;flex-wrap:wrap}
@@ -19,19 +19,19 @@
     }
   </style>
 </head>
-<body class="dictionary-bg theme-bg">
+<body class="dictionary-bg">
 
   <main>
     <div class="page-header">
-      <h2 class="title" id="dict-title">Sign Language Dictionary</h2>
+      <h2 class="title" id="dict-title" data-translate-key="dict_title">Sign Language Dictionary</h2>
       <div class="page-header-actions">
-        <div class="lang-select-wrap">
-          <label for="lang-select-dict">Language</label>
-          <select id="lang-select-dict" class="lang-select-global">
-            <option value="en">English</option>
-            <option value="si">සිංහල (Sinhala)</option>
-            <option value="ta">தமிழ் (Tamil)</option>
-          </select>
+        <div class="language-switcher">
+            <i class="fas fa-globe" style="color: #333;"></i>
+            <ul class="language-dropdown">
+                <li><a href="#" data-lang="en">English</a></li>
+                <li><a href="#" data-lang="si">සිංහල</a></li>
+                <li><a href="#" data-lang="ta">தமிழ்</a></li>
+            </ul>
         </div>
       </div>
     </div>
@@ -40,10 +40,10 @@
       <table id="dict-table">
         <thead>
           <tr>
-            <th id="th-word">Word / Phrase</th>
-            <th id="th-si">Pronunciation (Sinhala)</th>
-            <th id="th-ta">Pronunciation (Tamil)</th>
-            <th id="th-meaning">Meaning / Notes</th>
+            <th id="th-word" data-translate-key="dict_th_word">Word / Phrase</th>
+            <th id="th-si" data-translate-key="dict_th_si">Pronunciation (Sinhala)</th>
+            <th id="th-ta" data-translate-key="dict_th_ta">Pronunciation (Tamil)</th>
+            <th id="th-meaning" data-translate-key="dict_th_meaning">Meaning / Notes</th>
           </tr>
         </thead>
         <tbody>
@@ -101,87 +101,16 @@
 
   </main>
 
- <footer class="bottom-nav">
-    <a href="index.html">🏠</a>
-    <a href="pages/gesture/gesture.html">📷</a>
-    <a href="education.html">📘</a>
-    <a href="dictionary.html">📖</a>
-   <a href="pages/schools.html">🏫</a>
-   <a href="pages/quiz.html">📝</a>
+  <footer class="footer">
+    <a href="index.html"><i class="fas fa-home"></i></a>
+    <a href="pages/gesture/gesture.html"><i class="fas fa-camera"></i></a>
+    <a href="pages/schools.html"><i class="fas fa-school"></i></a>
+    <a href="education.html"><i class="fas fa-book-open"></i></a>
+    <a href="dictionary.html" class="active"><i class="fas fa-book"></i></a>
   </footer>
 
 
 </body>
 </html>
 
-<script src="js/footer.js"></script>
-<script>
-  // Translation map for dictionary page
-  const dictTranslations = {
-    en: {
-      title: "Sign Language Dictionary",
-      thWord: "Word / Phrase",
-      thSi: "Pronunciation (Sinhala)",
-      thTa: "Pronunciation (Tamil)",
-      thMeaning: "Meaning / Notes",
-      words: [
-        "Hello","I Love You","No","Sorry","Thank You","Understood","We Are","Yes"
-      ],
-      si: [
-        "හෙලෝ","මම ඔබට ආදරෙයි","නැහැ","සමාවන්න","ස්තුතියි","තේරුණා","අපි","ඔව්"
-      ],
-      ta: [
-        "ஹலோ","நான் உன்னை காதலிக்கிறேன்","இல்லை","மன்னிக்கவும்","நன்றி","புரிந்துகொண்டேன்","நாம்","ஆம்"
-      ],
-      meaning: [
-        "Greeting","Expression of love","Negative answer","Apology","Gratitude","Confirm understanding","Pronoun / group","Positive answer"
-      ]
-    },
-    si: {
-      title: "සංඥා භාෂා ශබ්දකෝෂය",
-      thWord: "වචනය / වාක්‍යය",
-      thSi: "සිංහල උච්චාරණය",
-      thTa: "දෙමළ උච්චාරණය",
-      thMeaning: "අර්ථය / සටහන්",
-      words: [
-        "හෙලෝ","මම ඔබට ආදරෙයි","නැහැ","සමාවන්න","ස්තුතියි","තේරුණා","අපි","ඔව්"
-      ],
-      si: [
-        "හෙලෝ","මම ඔබට ආදරෙයි","නැහැ","සමාවන්න","ස්තුතියි","තේරුණා","අපි","ඔව්"
-      ],
-      ta: [
-        "ஹலோ","நான் உன்னை காதலிக்கிறேன்","இல்லை","மன்னிக்கவும்","நன்றி","புரிந்துகொண்டேன்","நாம்","ஆம்"
-      ],
-      meaning: [
-        "ආයුබෝවන්","ආදරය ප්‍රකාශ කිරීම","අවලංගු පිළිතුර","සමාව ඉල්ලා ගැනීම","ආභාරය","තේරුම් ගත් බව","ප්‍රනාම/කණ්ඩායම","ධනාත්මක පිළිතුර"
-      ]
-    },
-    ta: {
-      title: "சைகை மொழி அகராதி",
-      thWord: "சொல் / சொற்றொடர்",
-      thSi: "சிங்கள உச்சரிப்பு",
-      thTa: "தமிழ் உச்சரிப்பு",
-      thMeaning: "பொருள் / குறிப்புகள்",
-      words: [
-        "ஹலோ","நான் உன்னை காதலிக்கிறேன்","இல்லை","மன்னிக்கவும்","நன்றி","புரிந்துகொண்டேன்","நாம்","ஆம்"
-      ],
-      si: [
-        "හෙලෝ","මම ඔබට ආදරෙයි","නැහැ","සමාවන්න","ස්තුතියි","තේරුණා","අපි","ඔව්"
-      ],
-      ta: [
-        "ஹலோ","நான் உன்னை காதலிக்கிறேன்","இல்லை","மன்னிக்கவும்","நன்றி","புரிந்துகொண்டேன்","நாம்","ஆம்"
-      ],
-      meaning: [
-        "வணக்கம்","அன்பை வெளிப்படுத்தும் சொல்","எதிர்மறை பதில்","மன்னிப்பு","நன்றி","புரிந்துகொண்டேன்","சுட்டுப்பெயர்/குழு","உறுதியான பதில்"
-      ]
-    }
-  };
-      function applyDictLang(lang){
-        document.getElementById('dict-title').textContent = dictTranslations[lang].title;
-        document.querySelectorAll('.dict-term').forEach((el,i)=>{ el.textContent = dictTranslations[lang].terms[i] || el.textContent; });
-      }
-      const selDict = document.getElementById('lang-select-dict');
-      if(window.ChirovoxLang){ selDict.value = window.ChirovoxLang.getLang(); }
-      selDict.addEventListener('change', (e)=>{ const l=e.target.value; applyDictLang(l); window.ChirovoxLang && window.ChirovoxLang.setLang(l); });
-      window.addEventListener('chirovox:langchange', (ev)=>{ selDict.value = ev.detail.lang; applyDictLang(ev.detail.lang); });
-</script>
+<script src="js/global-lang.js"></script>

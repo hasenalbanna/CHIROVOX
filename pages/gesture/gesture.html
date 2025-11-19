@@ -4,9 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Camera - CHIROVOX</title>
-  <link rel="stylesheet" href="gesture.css">
-  <!-- Use root-relative path to load the shared theme CSS correctly -->
-  <link rel="stylesheet" href="../../css/theme.css">
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <style>
     /* Premium header alignment for camera page */
     .camera-controls{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:18px;flex-wrap:wrap}
@@ -36,27 +35,27 @@
 <body class="gesture-bg">
 
  <main>
-  <h2 class="title">Real-Time Sign Language Detection</h2>
+  <h2 class="title" data-translate-key="gesture_title">Real-Time Sign Language Detection</h2>
 
   <section class="orb-screen">
     <div class="orb">
       <div class="orb-anim"></div>
     </div>
-    <p class="muted-text">How can I help you today?</p>
+    <p class="muted-text" data-translate-key="gesture_help_text">How can I help you today?</p>
     <div class="spacer-18"></div>
     <div class="camera-controls">
       <div class="left-controls">
-        <button id="start-camera-btn" class="mic-btn" disabled aria-disabled="true">Loading model...</button>
+        <button id="start-camera-btn" class="mic-btn premium-btn" disabled aria-disabled="true" data-translate-key="gesture_loading">Loading model...</button>
         <!-- Stop button (hidden until camera running) -->
-        <button id="stop-camera-btn" class="mic-btn" style="display:none;">Stop</button>
+        <button id="stop-camera-btn" class="mic-btn premium-btn" style="display:none;" data-translate-key="gesture_stop">Stop</button>
       </div>
-      <div class="lang-select-wrap">
-        <label for="lang-select">Language</label>
-        <select id="lang-select" class="lang-select-global" aria-label="Select TTS language">
-          <option value="en-US">English</option>
-          <option value="si-LK">සිංහල (Sinhala)</option>
-          <option value="ta-IN">தமிழ் (Tamil)</option>
-        </select>
+      <div class="language-switcher">
+          <i class="fas fa-globe"></i>
+          <ul class="language-dropdown">
+              <li><a href="#" data-lang="en">English</a></li>
+              <li><a href="#" data-lang="si">සිංහල</a></li>
+              <li><a href="#" data-lang="ta">தமிழ்</a></li>
+          </ul>
       </div>
     </div>
 
@@ -66,50 +65,20 @@
         <video id="camera" autoplay playsinline class="hidden" muted></video>
         <canvas id="output" class="hidden"></canvas>
       </div>
-      <p class="hidden preview-label">Detected Sign: <span id="detected-sign">None</span></p>
+      <p class="hidden preview-label"><span data-translate-key="gesture_detected_sign">Detected Sign:</span> <span id="detected-sign">None</span></p>
     </div>
   </section>
 </main>
 
-  <footer class="bottom-nav">
-    <a href="../../index.html">🏠</a>
-    <a href="gesture.html">📷</a>
-    <a href="../../education.html">📘</a>
-    <a href="../../dictionary.html">📖</a>
-    <a href="../schools.html">🏫</a>
-    <a href="../quiz.html">📝</a>
+  <footer class="footer">
+    <a href="../../index.html"><i class="fas fa-home"></i></a>
+    <a href="gesture.html" class="active"><i class="fas fa-camera"></i></a>
+    <a href="../schools.html"><i class="fas fa-school"></i></a>
+    <a href="../../education.html"><i class="fas fa-book-open"></i></a>
+    <a href="../../dictionary.html"><i class="fas fa-book"></i></a>
   </footer>
 
-  <!-- Floating theme toggle specific to the camera page (in case header toggle is absent) -->
-  <button id="gesture-theme-toggle" class="theme-toggle global-theme-toggle gesture-toggle-pos" title="Toggle light mode" aria-pressed="false">
-    <span class="toggle-ico">🌙</span>
-  </button>
-
   <script src="gesture.js"></script>
-  <!-- footer script should be referenced from project root -->
-  <script src="../../js/footer.js"></script>
-  <script>
-    // Wire the page-specific theme toggle and ensure its state matches saved preference
-    (function(){
-      try{
-        const btn = document.getElementById('gesture-theme-toggle');
-        const root = document.documentElement;
-        const saved = localStorage.getItem('chirovox:light');
-        const initOn = saved === '1';
-        if(initOn) root.classList.add('light-mode');
-        if(btn){
-          btn.setAttribute('aria-pressed', String(!!initOn));
-          btn.querySelector('.toggle-ico').textContent = initOn? '☀️':'🌙';
-          btn.addEventListener('click', ()=>{
-            const on = root.classList.toggle('light-mode');
-            localStorage.setItem('chirovox:light', on? '1':'0');
-            btn.classList.toggle('active', on);
-            btn.setAttribute('aria-pressed', String(!!on));
-            btn.querySelector('.toggle-ico').textContent = on? '☀️':'🌙';
-          });
-        }
-      }catch(e){ /* ignore */ }
-    })();
-  </script>
+  <script src="../../js/global-lang.js"></script>
 </body>
 </html>

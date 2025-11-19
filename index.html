@@ -17,27 +17,43 @@
             <span class="header-logo-text">CHIROVOX</span>
         </div>
         <div class="header-icons">
-            <i class="fas fa-globe"></i>
+            <div class="language-switcher">
+                <i class="fas fa-globe"></i>
+                <ul class="language-dropdown">
+                    <li><a href="#" data-lang="en">English</a></li>
+                    <li><a href="#" data-lang="si">සිංහල</a></li>
+                    <li><a href="#" data-lang="ta">தமிழ்</a></li>
+                </ul>
+            </div>
             <i class="fas fa-sun"></i>
         </div>
     </header>
 
     <main class="main-content">
         <img src="assets/images/home/robot.png" alt="Waving Robot" class="robot-main">
-        <h1 class="app-title">Your Hands<br>Speak Aloud</h1>
-        <p class="app-subtitle">Point the camera to translate instantly!</p>
+        <h1 class="app-title" data-translate-key="home_title">Your Hands<br>Speak Aloud</h1>
+        <p class="app-subtitle" data-translate-key="home_subtitle">Point the camera to translate instantly!</p>
 
         <a href="pages/gesture/gesture.html" class="scan-btn">
             <i class="fas fa-camera"></i>
-            <span>Scan My<br>Hands!</span>
+            <span data-translate-key="home_scan">Scan My<br>Hands!</span>
         </a>
 
         <a href="dictionary.html" class="practice-btn">
-            <span>Practice Signs</span>
+            <span data-translate-key="home_practice">Practice Signs</span>
             <i class="fas fa-hand-paper"></i>
         </a>
     </main>
 
+    <footer class="footer">
+        <a href="index.html" class="active"><i class="fas fa-home"></i></a>
+        <a href="pages/gesture/gesture.html"><i class="fas fa-camera"></i></a>
+        <a href="pages/schools.html"><i class="fas fa-school"></i></a>
+        <a href="education.html"><i class="fas fa-book-open"></i></a>
+        <a href="dictionary.html"><i class="fas fa-book"></i></a>
+    </footer>
+
     <script src="js/script.js"></script>
+    <script src="js/global-lang.js"></script>
   </body>
 </html>

@@ -6,6 +6,7 @@
   <title>School Signs - CHIROVOX</title>
   <link rel="stylesheet" href="../css/style.css?v=1.1">
   <link rel="stylesheet" href="../css/theme.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <style>
     /* Premium page styling for schools */
     .mobile-container{max-width:900px;margin:0 auto;padding:20px}
@@ -13,6 +14,45 @@
     .glass-card > div:first-child{display:flex;gap:12px;align-items:center;justify-content:center;flex-wrap:wrap;padding:10px}
     .glass-card label{font-size:13px;font-weight:600;color:var(--muted);margin:0}
     .glass-card select{padding:6px 10px}
+
+    .sign-btn-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .sign-btn {
+      background-color: #f2eefc;
+      border: 1px solid #dcd6f0;
+      border-radius: 25px;
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #4a4a4a;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    .sign-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(128, 100, 212, 0.15);
+      background-color: #e8e0f8;
+    }
+
+    .sign-btn:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .sign-icon {
+      font-size: 1.2em;
+    }
   </style>
 </head>
 <body class="education-bg theme-bg">
@@ -66,16 +106,15 @@
   </section>
 </main>
 
-<footer class="bottom-nav">
-  <a href="../index.html">🏠</a>
-  <a href="gesture/gesture.html">📷</a>
-  <a href="../education.html">📘</a>
-  <a href="../dictionary.html">📖</a>
-  <a href="schools.html">🏫</a>
-  <a href="quiz.html">📝</a>
+<footer class="footer">
+    <a href="../index.html"><i class="fas fa-home"></i></a>
+    <a href="gesture/gesture.html"><i class="fas fa-camera"></i></a>
+    <a href="schools.html" class="active"><i class="fas fa-school"></i></a>
+    <a href="../education.html"><i class="fas fa-book-open"></i></a>
+    <a href="../dictionary.html"><i class="fas fa-book"></i></a>
 </footer>
 
 <script src="schools.js"></script>
-<script src="../js/footer.js"></script>
+<script src="../js/global-lang.js"></script>
 </body>
 </html>

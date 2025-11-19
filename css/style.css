@@ -1,23 +1,21 @@
-/* Backgrounds */
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
-  color: white;
+  color: #333; /* Changed text color for better readability on a light background */
   text-align: center;
   min-height: 100vh;
-  background: linear-gradient(160deg, #a2d2ff, #bde0fe, #ffafcc, #ffc8dd);
-  background-size: 400% 400%;
-  animation: gradientAnimation 15s ease infinite;
+  background: linear-gradient(160deg, #e0c3fc, #8ec5fc); /* New background gradient */
+  background-attachment: fixed; /* Keep background fixed */
 }
 
+/* Remove the animation */
+/* 
 @keyframes gradientAnimation {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
-
-
-
+*/
 
 /* Optional: keep background fixed when scrolling */
 body, .home-bg, .gesture-bg, .education-bg, .dictionary-bg, .quiz-bg {
@@ -28,7 +26,8 @@ body, .home-bg, .gesture-bg, .education-bg, .dictionary-bg, .quiz-bg {
 .title {
   margin-top: 2rem;
   font-size: 1.8rem;
-  text-shadow: 0 3px 8px rgba(0,0,0,0.6);
+  color: #333; /* Adjusted for light background */
+  text-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Softer shadow */
 }
 
 /* Glass Cards */
@@ -40,63 +39,6 @@ body, .home-bg, .gesture-bg, .education-bg, .dictionary-bg, .quiz-bg {
 }
 
 .card-btn {
-  display: block;
-  padding: 2rem 1rem;
-  border-radius: 20px;
-  text-decoration: none;
-  color: white;
-  background: rgba(255, 255, 255, 0.914);
-  font-size: 1rem;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-  transition: 0.2s;
-}
-
-.card-btn:hover {
-  background: rgba(255, 255, 255, 0.25);
-}
-
-/* Glass Box */
-.glass {
-  background: rgba(255, 255, 255, 0.12);
-  border-radius: 16px;
-  padding: 1rem;
-  margin: 2rem;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
-}
-
-/* Camera Video */
-#camera {
-  width: 100%;
-  border-radius: 16px;
-  margin-bottom: 1rem;
-}
-
-/* Bottom Nav */
-.bottom-nav {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(255, 255, 255, 0.12);
-  border-radius: 16px;
-  margin: 0.5rem;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
-  display: flex;
-  justify-content: space-around;
-  padding: 0.8rem 0;
-}
-
-.bottom-nav a {
-  font-size: 1.5rem;
-  text-decoration: none;
-  color: white; /* Default color */
-}
-
-.bottom-nav a.active {
-  color: #FFD700; /* Gold color for active link */
-}
-
-.card-btn {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -104,10 +46,10 @@ body, .home-bg, .gesture-bg, .education-bg, .dictionary-bg, .quiz-bg {
   padding: 2rem 1rem;
   border-radius: 20px;
   text-decoration: none;
-  color: white;
-  background: rgba(255, 255, 255, 0.15);
+  color: #333;
+  background: rgba(255, 255, 255, 0.6);
   font-size: 1rem;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
   transition: 0.3s;
    /* Example */
   background-size: 40px 40px; /* size of icon */
@@ -117,7 +59,7 @@ body, .home-bg, .gesture-bg, .education-bg, .dictionary-bg, .quiz-bg {
 }
 
 .card-btn:hover {
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.8);
 }
 .card-btn img {
   width: 100%;
@@ -125,7 +67,7 @@ body, .home-bg, .gesture-bg, .education-bg, .dictionary-bg, .quiz-bg {
   height: 200px;
   margin-bottom: 1rem;
   border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
   background: rgba(255,255,255,0.1);
   padding: 0;
   object-fit: cover;
@@ -137,11 +79,11 @@ html {
 
 
 .glass-table {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.6);
   border-radius: 16px;
   padding: 1rem;
   margin: 1rem;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
   width: calc(100% - 2rem); /* full width with margin */
   overflow-x: auto; /* horizontal scroll for small screens */
 }
@@ -154,16 +96,143 @@ html {
 
 .glass-table th, .glass-table td {
   padding: 1rem 0.5rem;
-  border-bottom: 1px solid rgba(255,255,255,0.2);
-  color: white;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  color: #333;
 }
 
 .glass-table th {
-  background: rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.3);
   font-weight: 600;
 }
 
 .glass-table tr:hover {
-  background: rgba(255,255,255,0.1);
+  background: rgba(0,0,0,0.05);
   transition: 0.3s;
+}
+
+/* Premium Button Style */
+.premium-btn {
+  background: linear-gradient(145deg, #007bff, #0056b3);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.premium-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.premium-btn:not(:disabled):hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
+}
+
+.premium-btn:not(:disabled):active {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 10px rgba(0, 123, 255, 0.3);
+}
+
+/* Page Header for inner pages */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  margin-top: 1rem;
+}
+.page-header .title {
+  margin: 0;
+  text-align: left;
+}
+.page-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* --- Language Switcher (for light theme pages) --- */
+.language-switcher {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.language-dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background-color: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    min-width: 120px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);
+    z-index: 100;
+    list-style: none;
+    padding: 0.5rem 0;
+    margin: 0;
+    border-radius: 8px;
+    border: 1px solid rgba(0,0,0,0.1);
+}
+
+.language-switcher:hover .language-dropdown {
+    display: block;
+}
+
+.language-dropdown li {
+    margin: 0;
+    padding: 0;
+}
+
+.language-dropdown li a {
+    color: #333;
+    padding: 8px 16px;
+    text-decoration: none;
+    display: block;
+    font-size: 14px;
+}
+
+.language-dropdown li a:hover {
+    background-color: rgba(0,0,0,0.05);
+}
+
+/* --- Footer --- */
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.7);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  justify-content: space-around;
+  padding: 0.8rem 0;
+  box-shadow: 0 -4px 12px rgba(0,0,0,0.1);
+}
+
+.footer a {
+  font-size: 1.5rem;
+  text-decoration: none;
+  color: #555; /* Default icon color */
+  transition: color 0.2s;
+}
+
+.footer a:hover {
+  color: #007bff; /* Highlight color on hover */
+}
+
+.footer a.active {
+  color: #007bff; /* Gold color for active link */
 }

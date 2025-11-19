@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Education - CHIROVOX</title>
   <link rel="stylesheet" href="css/style.css?v=1.1">
-  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <style>
     /* Premium header alignment for education page */
     .page-header{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:20px;margin-bottom:20px;flex-wrap:wrap}
@@ -19,19 +19,19 @@
     }
   </style>
 </head>
-<body class="education-bg theme-bg">
+<body class="education-bg">
 
   <main>
     <div class="page-header">
-      <h2 class="title" id="edu-title">Learn Sri Lankan Sign Language</h2>
+      <h2 class="title" id="edu-title" data-translate-key="edu_title">Learn Sri Lankan Sign Language</h2>
       <div class="page-header-actions">
-        <div class="lang-select-wrap">
-          <label for="lang-select-edu">Language</label>
-          <select id="lang-select-edu" class="lang-select-global">
-            <option value="en">English</option>
-            <option value="si">සිංහල (Sinhala)</option>
-            <option value="ta">தமிழ் (Tamil)</option>
-          </select>
+        <div class="language-switcher">
+            <i class="fas fa-globe" style="color: #333;"></i>
+            <ul class="language-dropdown">
+                <li><a href="#" data-lang="en">English</a></li>
+                <li><a href="#" data-lang="si">සිංහල</a></li>
+                <li><a href="#" data-lang="ta">தமிழ்</a></li>
+            </ul>
         </div>
       </div>
     </div>
@@ -96,67 +96,14 @@
 
   </main>
 
-  <footer class="bottom-nav">
-    <a href="index.html">🏠</a>
-    <a href="pages/gesture/gesture.html">📷</a>
-    <a href="education.html">📘</a>
-    <a href="dictionary.html">📖</a>
-    <a href="pages/schools.html">🏫</a>
-    <a href="pages/quiz.html">📝</a>
+  <footer class="footer">
+    <a href="index.html"><i class="fas fa-home"></i></a>
+    <a href="pages/gesture/gesture.html"><i class="fas fa-camera"></i></a>
+    <a href="pages/schools.html"><i class="fas fa-school"></i></a>
+    <a href="education.html" class="active"><i class="fas fa-book-open"></i></a>
+    <a href="dictionary.html"><i class="fas fa-book"></i></a>
   </footer>
 
-  <script src="js/footer.js"></script>
-  <script>
-    // Simple translation map for education page
-    const eduTranslations = {
-      en: {
-        title: "Learn Sri Lankan Sign Language",
-        cards: [
-          "Used as a greeting in Sri Lankan Sign Language.",
-          "Expression of love in sign language.",
-          "Used to indicate a negative answer.",
-          "Used to apologize or express regret.",
-          "Used to express gratitude.",
-          "Used to confirm understanding.",
-          "Represents a pronoun/group in sign language.",
-          "Used to indicate a positive answer."
-        ]
-      },
-      si: {
-        title: "ශ්‍රී ලංකා සංඥා භාෂාව ඉගෙන ගන්න",
-        cards: [
-          "ආයුබෝවන් ලෙස භාවිතා වේ.",
-          "ආදරය ප්‍රකාශ කිරීම සඳහා.",
-          "අවලංගු පිළිතුරක් දැක්වීමට.",
-          "සමාව ඉල්ලා ගැනීමට.",
-          "ආභාරය ප්‍රකාශ කිරීමට.",
-          "තේරුම් ගත් බව තහවුරු කිරීමට.",
-          "සංඥා භාෂාවේ ප්‍රනාම/කණ්ඩායම.",
-          "ධනාත්මක පිළිතුරක් දැක්වීමට."
-        ]
-      },
-      ta: {
-        title: "இலங்கை சைகை மொழியை கற்றுக்கொள்ளுங்கள்",
-        cards: [
-          "வணக்கமாக பயன்படுத்தப்படுகிறது.",
-          "அன்பை வெளிப்படுத்த.",
-          "எதிர்மறை பதிலை குறிப்பிட.",
-          "மன்னிப்பு கேட்க.",
-          "நன்றி தெரிவிக்க.",
-          "புரிந்துகொண்டதை உறுதிப்படுத்த.",
-          "சைகை மொழியில் சுட்டுப்பெயர்/குழு.",
-          "உறுதியான பதிலை குறிப்பிட."
-        ]
-      }
-    };
-    function applyEduLang(lang){
-      document.getElementById('edu-title').textContent = eduTranslations[lang].title;
-      document.querySelectorAll('.cards .card-btn p').forEach((p,i)=>{ p.textContent = eduTranslations[lang].cards[i] || ''; });
-    }
-    const selEdu = document.getElementById('lang-select-edu');
-    if(window.ChirovoxLang){ selEdu.value = window.ChirovoxLang.getLang(); }
-    selEdu.addEventListener('change', (e)=>{ const l=e.target.value; applyEduLang(l); window.ChirovoxLang && window.ChirovoxLang.setLang(l); });
-    window.addEventListener('chirovox:langchange', (ev)=>{ selEdu.value = ev.detail.lang; applyEduLang(ev.detail.lang); });
-  </script>
+  <script src="js/global-lang.js"></script>
   </body>
 </html>
