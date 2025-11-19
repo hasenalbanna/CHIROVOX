@@ -1,0 +1,123 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  color: white;
+  text-align: center;
+  min-height: 100vh;
+  background-image: linear-gradient(rgba(2,8,20,0.86), rgba(6,18,36,0.78));
+  background-size: auto;
+  background-position: center center;
+}
+
+@media (max-width:480px){
+  body{
+    background-image: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.72)), url('../assets/images/CHIROVOX.png');
+    background-size: cover;
+    background-position: center center;
+  }
+}
+
+.title {
+  margin-top: 1rem;
+  font-size: 1.8rem;
+  text-shadow: 0 3px 8px rgba(0,0,0,0.6);
+}
+
+.glass {
+  background: rgba(255,255,255,0.15);
+  -webkit-backdrop-filter: blur(15px);
+  backdrop-filter: blur(15px);
+  border-radius: 16px;
+  padding: 2rem;
+  margin: 2rem auto;
+  width: 90%;
+  max-width: 600px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+}
+
+/* utility */
+.hidden{ display: none !important; }
+
+/* Quick buttons grid */
+.quick-buttons-grid{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap:0.75rem;
+  margin-top:1rem;
+}
+.quick-btn{
+  padding:0.6rem 0.8rem;
+  border-radius:12px;
+  background: rgba(255,255,255,0.12);
+  color: white;
+  font-weight:600;
+  border: none;
+  cursor:pointer;
+  transition: transform .12s ease, background .12s ease;
+  text-align:center;
+}
+.quick-btn:active{ transform: scale(.98); }
+.quick-btn:hover{ background: rgba(255,255,255,0.2); }
+
+@media (max-width:720px){
+  .quick-buttons-grid{ grid-template-columns: repeat(2,1fr); }
+}
+@media (max-width:420px){
+  .quick-buttons-grid{ grid-template-columns: repeat(1,1fr); }
+}
+
+input[type="text"] {
+  width: 80%;
+  padding: 0.8rem;
+  border-radius: 12px;
+  border: none;
+  margin-bottom: 1rem;
+}
+
+button {
+  padding: 0.8rem 1.5rem;
+  border-radius: 12px;
+  border: none;
+  background: rgba(255,255,255,0.25);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: rgba(255,255,255,0.35);
+}
+
+#quiz-container {
+  text-align: left;
+}
+
+.question {
+  margin-bottom: 1rem;
+}
+
+.options label {
+  display: block;
+  margin: 0.5rem 0;
+  cursor: pointer;
+}
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(15px);
+  border-radius: 16px;
+  padding: 0.8rem 0;
+  display: flex;
+  justify-content: space-around;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+}
+.bottom-nav a {
+  font-size: 1.5rem;
+  text-decoration: none;
+}

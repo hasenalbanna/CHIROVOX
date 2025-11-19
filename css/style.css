@@ -1,0 +1,169 @@
+/* Backgrounds */
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  color: white;
+  text-align: center;
+  min-height: 100vh;
+  background: linear-gradient(160deg, #a2d2ff, #bde0fe, #ffafcc, #ffc8dd);
+  background-size: 400% 400%;
+  animation: gradientAnimation 15s ease infinite;
+}
+
+@keyframes gradientAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+
+
+
+/* Optional: keep background fixed when scrolling */
+body, .home-bg, .gesture-bg, .education-bg, .dictionary-bg, .quiz-bg {
+  background-attachment: fixed;
+}
+
+/* Title */
+.title {
+  margin-top: 2rem;
+  font-size: 1.8rem;
+  text-shadow: 0 3px 8px rgba(0,0,0,0.6);
+}
+
+/* Glass Cards */
+.cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  padding: 2rem;
+}
+
+.card-btn {
+  display: block;
+  padding: 2rem 1rem;
+  border-radius: 20px;
+  text-decoration: none;
+  color: white;
+  background: rgba(255, 255, 255, 0.914);
+  font-size: 1rem;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+  transition: 0.2s;
+}
+
+.card-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* Glass Box */
+.glass {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  padding: 1rem;
+  margin: 2rem;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+}
+
+/* Camera Video */
+#camera {
+  width: 100%;
+  border-radius: 16px;
+  margin-bottom: 1rem;
+}
+
+/* Bottom Nav */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  margin: 0.5rem;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  display: flex;
+  justify-content: space-around;
+  padding: 0.8rem 0;
+}
+
+.bottom-nav a {
+  font-size: 1.5rem;
+  text-decoration: none;
+  color: white; /* Default color */
+}
+
+.bottom-nav a.active {
+  color: #FFD700; /* Gold color for active link */
+}
+
+.card-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  border-radius: 20px;
+  text-decoration: none;
+  color: white;
+  background: rgba(255, 255, 255, 0.15);
+  font-size: 1rem;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+  transition: 0.3s;
+   /* Example */
+  background-size: 40px 40px; /* size of icon */
+  background-repeat: no-repeat;
+  background-position: top center;
+  padding-top: 3rem; /* leave space for image */
+}
+
+.card-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+.card-btn img {
+  width: 100%;
+  max-width: 280px;
+  height: 200px;
+  margin-bottom: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  background: rgba(255,255,255,0.1);
+  padding: 0;
+  object-fit: cover;
+}
+html {
+  scroll-behavior: smooth;
+}
+
+
+
+.glass-table {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  padding: 1rem;
+  margin: 1rem;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  width: calc(100% - 2rem); /* full width with margin */
+  overflow-x: auto; /* horizontal scroll for small screens */
+}
+
+.glass-table table {
+  width: 100%; /* table fills the card */
+  border-collapse: collapse;
+  text-align: center;
+}
+
+.glass-table th, .glass-table td {
+  padding: 1rem 0.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  color: white;
+}
+
+.glass-table th {
+  background: rgba(255,255,255,0.1);
+  font-weight: 600;
+}
+
+.glass-table tr:hover {
+  background: rgba(255,255,255,0.1);
+  transition: 0.3s;
+}

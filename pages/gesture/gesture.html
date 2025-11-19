@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Camera - CHIROVOX</title>
+  <link rel="stylesheet" href="gesture.css">
+  <!-- Use root-relative path to load the shared theme CSS correctly -->
+  <link rel="stylesheet" href="../../css/theme.css">
+  <style>
+    /* Premium header alignment for camera page */
+    .camera-controls{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:18px;flex-wrap:wrap}
+    .left-controls{display:flex;gap:8px;align-items:center}
+    .lang-select-wrap{display:inline-flex;gap:6px;align-items:center;flex-shrink:0}
+    .lang-select-wrap label{font-size:13px;font-weight:600;color:var(--muted);white-space:nowrap;margin:0}
+    @media (max-width:480px){
+      .camera-controls{flex-direction:column;gap:10px}
+      .lang-select-wrap{width:100%}
+    }
+  </style>
+  <script>
+    // Apply saved theme preference as early as possible so camera page respects light-mode
+    (function(){
+      try{
+        if(localStorage && localStorage.getItem('chirovox:light') === '1'){
+          document.documentElement.classList.add('light-mode');
+        }
+      }catch(e){ /* ignore */ }
+    })();
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.11.0/dist/tf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"></script>
+</head>
+<body class="gesture-bg">
+
+ <main>
+  <h2 class="title">Real-Time Sign Language Detection</h2>
+
+  <section class="orb-screen">
+    <div class="orb">
+      <div class="orb-anim"></div>
+    </div>
+    <p class="muted-text">How can I help you today?</p>
+    <div class="spacer-18"></div>
+    <div class="camera-controls">
+      <div class="left-controls">
+        <button id="start-camera-btn" class="mic-btn" disabled aria-disabled="true">Loading model...</button>
+        <!-- Stop button (hidden until camera running) -->
+        <button id="stop-camera-btn" class="mic-btn" style="display:none;">Stop</button>
+      </div>
+      <div class="lang-select-wrap">
+        <label for="lang-select">Language</label>
+        <select id="lang-select" class="lang-select-global" aria-label="Select TTS language">
+          <option value="en-US">English</option>
+          <option value="si-LK">සිංහල (Sinhala)</option>
+          <option value="ta-IN">தமிழ் (Tamil)</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Camera preview (video hidden underneath, canvas draws results) -->
+    <div class="camera-wrap">
+      <div class="preview-container">
+        <video id="camera" autoplay playsinline class="hidden" muted></video>
+        <canvas id="output" class="hidden"></canvas>
+      </div>
+      <p class="hidden preview-label">Detected Sign: <span id="detected-sign">None</span></p>
+    </div>
+  </section>
+</main>
+
+  <footer class="bottom-nav">
+    <a href="../../index.html">🏠</a>
+    <a href="gesture.html">📷</a>
+    <a href="../../education.html">📘</a>
+    <a href="../../dictionary.html">📖</a>
+    <a href="../schools.html">🏫</a>
+    <a href="../quiz.html">📝</a>
+  </footer>
+
+  <!-- Floating theme toggle specific to the camera page (in case header toggle is absent) -->
+  <button id="gesture-theme-toggle" class="theme-toggle global-theme-toggle gesture-toggle-pos" title="Toggle light mode" aria-pressed="false">
+    <span class="toggle-ico">🌙</span>
+  </button>
+
+  <script src="gesture.js"></script>
+  <!-- footer script should be referenced from project root -->
+  <script src="../../js/footer.js"></script>
+  <script>
+    // Wire the page-specific theme toggle and ensure its state matches saved preference
+    (function(){
+      try{
+        const btn = document.getElementById('gesture-theme-toggle');
+        const root = document.documentElement;
+        const saved = localStorage.getItem('chirovox:light');
+        const initOn = saved === '1';
+        if(initOn) root.classList.add('light-mode');
+        if(btn){
+          btn.setAttribute('aria-pressed', String(!!initOn));
+          btn.querySelector('.toggle-ico').textContent = initOn? '☀️':'🌙';
+          btn.addEventListener('click', ()=>{
+            const on = root.classList.toggle('light-mode');
+            localStorage.setItem('chirovox:light', on? '1':'0');
+            btn.classList.toggle('active', on);
+            btn.setAttribute('aria-pressed', String(!!on));
+            btn.querySelector('.toggle-ico').textContent = on? '☀️':'🌙';
+          });
+        }
+      }catch(e){ /* ignore */ }
+    })();
+  </script>
+</body>
+</html>

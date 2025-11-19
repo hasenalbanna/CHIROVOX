@@ -1,0 +1,27 @@
+# Ignore Python virtual environment
+venv_tfjs/
+__pycache__/
+*.pyc
+
+# Ignore file with long name
+A dictionary icon with a closed book and small _A-Z_ text on the cover, flat design, minimal vector, soft gradients, transparent background, mobile app friendly.without background iuse gold colur only.jpg
+
+# Ignore directory
+# Virtual environments
+venv/
+venv_tfjs/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Dataset
+pages/gesture/dataset/
+
+# VS Code
+.vscode/
+
+# IDE specific files
+.idea/
+*.swp
+*.swo

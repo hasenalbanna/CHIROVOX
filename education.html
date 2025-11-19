@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Education - CHIROVOX</title>
+  <link rel="stylesheet" href="css/style.css?v=1.1">
+  <link rel="stylesheet" href="css/theme.css">
+  <style>
+    /* Premium header alignment for education page */
+    .page-header{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:20px;margin-bottom:20px;flex-wrap:wrap}
+    .page-header .title{margin:0;flex:1;min-width:200px}
+    .page-header-actions{display:flex;gap:10px;align-items:center;flex-wrap:nowrap}
+    .lang-select-wrap{display:inline-flex;gap:6px;align-items:center;flex-shrink:0}
+    .lang-select-wrap label{font-size:13px;font-weight:600;color:var(--muted);white-space:nowrap;margin:0}
+    @media (max-width:768px){
+      .page-header{flex-direction:column;align-items:flex-start;gap:12px}
+      .page-header-actions{width:100%;justify-content:space-between}
+    }
+  </style>
+</head>
+<body class="education-bg theme-bg">
+
+  <main>
+    <div class="page-header">
+      <h2 class="title" id="edu-title">Learn Sri Lankan Sign Language</h2>
+      <div class="page-header-actions">
+        <div class="lang-select-wrap">
+          <label for="lang-select-edu">Language</label>
+          <select id="lang-select-edu" class="lang-select-global">
+            <option value="en">English</option>
+            <option value="si">සිංහල (Sinhala)</option>
+            <option value="ta">தமிழ் (Tamil)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <section class="cards">
+      <!-- Card 1 -->
+      <div class="card-btn">
+        <img src="assets/images/education_signs/1.jpg" alt="Hello Sign">
+        <h3>Hello</h3>
+        <p>Used as a greeting in Sri Lankan Sign Language.</p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="card-btn">
+        <img src="assets/images/education_signs/2.jpg" alt="I Love You Sign">
+        <h3>I Love You</h3>
+        <p>Expression of love in sign language.</p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="card-btn">
+        <img src="assets/images/education_signs/3.jpg" alt="No Sign">
+        <h3>No</h3>
+        <p>Used to indicate a negative answer.</p>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="card-btn">
+        <img src="assets/images/education_signs/4.jpg" alt="Sorry Sign">
+        <h3>Sorry</h3>
+        <p>Used to apologize or express regret.</p>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="card-btn">
+        <img src="assets/images/education_signs/5.jpg" alt="Thank You Sign">
+        <h3>Thank You</h3>
+        <p>Used to express gratitude.</p>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="card-btn">
+        <img src="assets/images/education_signs/6.jpg" alt="Understood Sign">
+        <h3>Understood</h3>
+        <p>Used to confirm understanding.</p>
+      </div>
+
+      <!-- Card 7 -->
+      <div class="card-btn">
+        <img src="assets/images/education_signs/7.jpg" alt="We Are Sign">
+        <h3>We Are</h3>
+        <p>Represents a pronoun/group in sign language.</p>
+      </div>
+
+      <!-- Card 8 -->
+      <div class="card-btn">
+        <img src="assets/images/education_signs/8.jpg" alt="Yes Sign">
+        <h3>Yes</h3>
+        <p>Used to indicate a positive answer.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="bottom-nav">
+    <a href="index.html">🏠</a>
+    <a href="pages/gesture/gesture.html">📷</a>
+    <a href="education.html">📘</a>
+    <a href="dictionary.html">📖</a>
+    <a href="pages/schools.html">🏫</a>
+    <a href="pages/quiz.html">📝</a>
+  </footer>
+
+  <script src="js/footer.js"></script>
+  <script>
+    // Simple translation map for education page
+    const eduTranslations = {
+      en: {
+        title: "Learn Sri Lankan Sign Language",
+        cards: [
+          "Used as a greeting in Sri Lankan Sign Language.",
+          "Expression of love in sign language.",
+          "Used to indicate a negative answer.",
+          "Used to apologize or express regret.",
+          "Used to express gratitude.",
+          "Used to confirm understanding.",
+          "Represents a pronoun/group in sign language.",
+          "Used to indicate a positive answer."
+        ]
+      },
+      si: {
+        title: "ශ්‍රී ලංකා සංඥා භාෂාව ඉගෙන ගන්න",
+        cards: [
+          "ආයුබෝවන් ලෙස භාවිතා වේ.",
+          "ආදරය ප්‍රකාශ කිරීම සඳහා.",
+          "අවලංගු පිළිතුරක් දැක්වීමට.",
+          "සමාව ඉල්ලා ගැනීමට.",
+          "ආභාරය ප්‍රකාශ කිරීමට.",
+          "තේරුම් ගත් බව තහවුරු කිරීමට.",
+          "සංඥා භාෂාවේ ප්‍රනාම/කණ්ඩායම.",
+          "ධනාත්මක පිළිතුරක් දැක්වීමට."
+        ]
+      },
+      ta: {
+        title: "இலங்கை சைகை மொழியை கற்றுக்கொள்ளுங்கள்",
+        cards: [
+          "வணக்கமாக பயன்படுத்தப்படுகிறது.",
+          "அன்பை வெளிப்படுத்த.",
+          "எதிர்மறை பதிலை குறிப்பிட.",
+          "மன்னிப்பு கேட்க.",
+          "நன்றி தெரிவிக்க.",
+          "புரிந்துகொண்டதை உறுதிப்படுத்த.",
+          "சைகை மொழியில் சுட்டுப்பெயர்/குழு.",
+          "உறுதியான பதிலை குறிப்பிட."
+        ]
+      }
+    };
+    function applyEduLang(lang){
+      document.getElementById('edu-title').textContent = eduTranslations[lang].title;
+      document.querySelectorAll('.cards .card-btn p').forEach((p,i)=>{ p.textContent = eduTranslations[lang].cards[i] || ''; });
+    }
+    const selEdu = document.getElementById('lang-select-edu');
+    if(window.ChirovoxLang){ selEdu.value = window.ChirovoxLang.getLang(); }
+    selEdu.addEventListener('change', (e)=>{ const l=e.target.value; applyEduLang(l); window.ChirovoxLang && window.ChirovoxLang.setLang(l); });
+    window.addEventListener('chirovox:langchange', (ev)=>{ selEdu.value = ev.detail.lang; applyEduLang(ev.detail.lang); });
+  </script>
+  </body>
+</html>

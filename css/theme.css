@@ -1,0 +1,570 @@
+/* Theme inspired by user's mockup: deep blue gradient, rounded glass cards, large orb on camera page */
+:root{
+  --bg1: #071428;
+  --bg2: #0b2340;
+  --card: rgba(255,255,255,0.06);
+  --card-strong: rgba(255,255,255,0.09);
+  --accent: #2eb7ff;
+  --muted: rgba(255,255,255,0.6);
+}
+
+/* Global safety: prevent horizontal overflow on mobile and make media responsive */
+*, *::before, *::after{ box-sizing: border-box }
+html, body{ overflow-x: hidden; }
+img, video, canvas, iframe{ max-width:100%; height:auto; display:block }
+
+/* Ensure main containers never exceed viewport width */
+.mobile-container, .app-shell, main{ max-width:100%; overflow-x: hidden }
+
+
+body.theme-bg, body.gesture-bg {
+  /* Dark theme: subtle deep gradient background. The full-page CHIROVOX image
+     is intentionally only used on small screens (mobile) to avoid a huge background
+     on desktop which made the image overpower the layout. */
+  background-image: linear-gradient(rgba(2,8,20,0.86), rgba(6,18,36,0.78));
+  background-size: auto;
+  background-position: center center;
+  background-repeat: no-repeat;
+  color: #e9f6ff;
+  font-family: 'Poppins', system-ui, Arial, sans-serif;
+}
+
+/* Ensure readable white type when dark theme is active.
+   Use html:not(.light-mode) so these rules do not override the light-mode palette. */
+html:not(.light-mode) body.theme-bg,
+html:not(.light-mode) body.gesture-bg {
+  color: #ffffff;
+}
+
+html:not(.light-mode) body.theme-bg h1,
+html:not(.light-mode) body.theme-bg h2,
+html:not(.light-mode) body.theme-bg h3,
+html:not(.light-mode) body.theme-bg h4,
+html:not(.light-mode) body.theme-bg h5,
+html:not(.light-mode) body.theme-bg h6,
+html:not(.light-mode) body.theme-bg p,
+html:not(.light-mode) body.theme-bg a,
+html:not(.light-mode) body.theme-bg span,
+html:not(.light-mode) body.theme-bg label,
+html:not(.light-mode) body.theme-bg li,
+html:not(.light-mode) body.theme-bg small,
+html:not(.light-mode) body.theme-bg .mini-title,
+html:not(.light-mode) body.theme-bg .model-title,
+html:not(.light-mode) body.theme-bg .page-credit,
+html:not(.light-mode) body.theme-bg .model-note,
+html:not(.light-mode) body.theme-bg .hero-card,
+html:not(.light-mode) body.theme-bg .mini-card,
+html:not(.light-mode) body.theme-bg .card-btn,
+html:not(.light-mode) body.theme-bg .bottom-nav,
+html:not(.light-mode) body.theme-bg .read-more {
+  color: #ffffff !important;
+}
+
+
+/* Home page dark background: tasteful CHIROVOX image with subtle overlay. 
+   On desktop the image is scaled and anchored to the right so it doesn't overpower content;
+   on mobile it becomes a full-cover background. */
+body.theme-bg.home-bg{
+  /* Blue-themed homepage background: soft deep-blues to replace the previous 'ace' look */
+  background-image: linear-gradient(180deg, rgba(3,37,76,0.78), rgba(6,48,101,0.72));
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: auto;
+  position: relative; /* create stacking for the pseudo-layer */
+}
+
+/* artwork layer that can fade when toggling themes */
+body.theme-bg.home-bg::before{
+  content: '';
+  position: fixed; /* fixed so it anchors to viewport */
+  inset: 0;
+  pointer-events: none;
+  background-image: url('../assets/images/CHIROVOX.png');
+  background-repeat: no-repeat;
+  background-position: right 6% center;
+  background-size: 560px auto;
+  /* subtly tint the artwork layer to harmonize with the blue background */
+  opacity: 0.6;
+  transition: opacity 420ms ease, transform 420ms ease, filter 420ms ease;
+  z-index: 0; /* sits behind page content (which will be z-index:1) */
+  transform: scale(1);
+  filter: saturate(0.95) hue-rotate(-10deg);
+}
+
+/* on small screens make the artwork full-cover for immersion */
+@media (max-width:480px){
+  body.theme-bg.home-bg::before{
+    background-position: center center;
+    background-size: cover;
+  }
+}
+
+/* when light mode is active fade the artwork layer out */
+.light-mode body.theme-bg.home-bg::before{
+  opacity: 0; transform: scale(1.02);
+}
+
+/* Global card */
+.glass-card{
+  /* stronger, more visible glass */
+  background: linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06));
+  border-radius: 18px;
+  padding: 14px;
+  box-shadow: 0 14px 50px rgba(0,0,0,0.75), inset 0 1px 0 rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.12);
+  position:relative; z-index:0;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+/* Watery animated border (brighter glow) */
+.glass-card::before{
+  content: "";
+  position: absolute;
+  inset: -5px;
+  border-radius: inherit;
+  padding: 5px; /* creates inner cutout when masking */
+  background: conic-gradient(from 0deg, rgba(255,255,255,0.18), rgba(46,183,255,0.65), rgba(255,255,255,0.08), rgba(46,183,255,0.45));
+  background-size: 240% 240%;
+  pointer-events: none;
+  -webkit-mask: linear-gradient(#fff,#fff) content-box, linear-gradient(#fff,#fff);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff,#fff) content-box, linear-gradient(#fff,#fff);
+  mask-composite: exclude;
+  opacity: 1;
+  transform: translateZ(0);
+  filter: blur(8px) saturate(140%);
+  animation: waterflow 3.2s linear infinite;
+  box-shadow: 0 6px 30px rgba(46,183,255,0.14);
+}
+
+/* Subtle moving sheen/ripples across the card surface (less dominant) */
+.glass-card::after{
+  content: "";
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  pointer-events:none;
+  background: linear-gradient(120deg, rgba(255,255,255,0.01) 0%, rgba(255,255,255,0.03) 50%, rgba(255,255,255,0.01) 100%);
+  mix-blend-mode: overlay;
+  opacity: 0.7;
+  background-size: 200% 200%;
+  animation: card-sheen 6s linear infinite;
+  filter: saturate(110%);
+}
+
+@keyframes waterflow{
+  0%{ background-position: 0% 40%; }
+  50%{ background-position: 100% 60%; }
+  100%{ background-position: 0% 40%; }
+}
+
+@keyframes card-sheen{
+  0%{ background-position: 0% 50%; opacity:0.6 }
+  50%{ background-position: 100% 50%; opacity:0.9 }
+  100%{ background-position: 0% 50%; opacity:0.6 }
+}
+
+/* Home layout */
+.app-shell {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 24px;
+  max-width: 1100px;
+  margin: 28px auto;
+  padding: 12px;
+}
+.left-col{ padding: 12px 4px; }
+.right-col{ padding: 12px; }
+
+.header-small{
+  display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:12px;
+}
+.branding{ font-weight:700; font-size:20px; letter-spacing:1px;}
+.subtle-btn{ background:var(--card); padding:8px 12px; border-radius:14px; color:var(--muted); border:1px solid rgba(255,255,255,0.03); }
+.home-feature{ display:flex; gap:12px; align-items:center; margin-bottom:14px; }
+.feature-image{ width:110px; height:110px; border-radius:12px; overflow:hidden; flex:0 0 110px; background:#0e3246; display:flex; align-items:center; justify-content:center; }
+.feature-image img{ width:100%; height:100%; object-fit:cover; opacity:0.95 }
+.feature-body{ flex:1 }
+.feature-body h3{ margin:0 0 6px 0; font-size:1.1rem }
+.feature-body p{ margin:0; color:var(--muted); font-size:0.92rem }
+
+.home-tiles{ display:grid; grid-template-columns: repeat(3,1fr); gap:10px; margin-top:10px }
+.card-btn{ display:flex; flex-direction:column; align-items:center; justify-content:center; padding:14px; border-radius:12px; background:var(--card); text-decoration:none; color:inherit; min-height:94px }
+.card-btn img{ width:48px; height:48px; object-fit:cover; border-radius:8px; margin-bottom:8px }
+
+/* Lighting / glowing border effect for linked images */
+.lit-glow, .mini-card img, .quick-action-item img, .card-btn img, .mini-icon img, .feature-image img{
+  border-radius:12px;
+  transition: transform 260ms cubic-bezier(.2,.9,.2,1), box-shadow 340ms ease, filter 280ms ease;
+  will-change: transform, box-shadow;
+  box-shadow: 0 8px 22px rgba(10,20,30,0.18), inset 0 1px 0 rgba(255,255,255,0.02);
+}
+
+/* subtle animated glow that breathes slowly */
+.lit-glow-animated, .mini-card img, .quick-action-item img, .card-btn img, .mini-icon img, .feature-image img{
+  animation: subtleGlow 4.8s ease-in-out infinite;
+}
+
+@keyframes subtleGlow{
+  0%{ box-shadow: 0 8px 22px rgba(10,20,30,0.12), 0 0 0 0 rgba(46,183,255,0.00) }
+  50%{ box-shadow: 0 18px 44px rgba(10,20,30,0.18), 0 0 28px 6px rgba(46,183,255,0.06) }
+  100%{ box-shadow: 0 8px 22px rgba(10,20,30,0.12), 0 0 0 0 rgba(46,183,255,0.00) }
+}
+
+/* hover/focus state: brighter rim and slight lift */
+.mini-card img:hover, .quick-action-item img:hover, .card-btn img:hover, .mini-icon img:hover, .feature-image img:hover,
+.mini-card a:hover img, .quick-action-item:hover img{
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 26px 60px rgba(6,30,50,0.28), 0 0 30px 8px rgba(46,183,255,0.12);
+  filter: saturate(1.08) brightness(1.04);
+}
+
+/* Light-mode friendly glow (so glow is visible on white backgrounds) */
+.light-mode .mini-card img, .light-mode .quick-action-item img, .light-mode .card-btn img, .light-mode .mini-icon img, .light-mode .feature-image img{
+  box-shadow: 0 8px 20px rgba(8,12,20,0.06), inset 0 1px 0 rgba(255,255,255,0.6);
+}
+
+/* Strong visible rim: apply to the container so it isn't clipped by the image */
+.mini-card, .quick-action-item, .card-btn, .mini-icon, .feature-image{ position:relative; border-radius:12px }
+.mini-card::after, .quick-action-item::after, .card-btn::after, .mini-icon::after, .feature-image::after{
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  /* default rim color (cyan-ish) */
+  --rim: rgba(46,183,255,0.62);
+  box-shadow: 0 0 0 2px var(--rim), 0 8px 24px rgba(46,183,255,0.06);
+  transition: box-shadow 260ms ease, opacity 220ms ease;
+}
+.mini-card:hover::after, .quick-action-item:hover::after, .card-btn:hover::after, .mini-icon:hover::after, .feature-image:hover::after{
+  box-shadow: 0 0 0 3px var(--rim), 0 18px 44px rgba(46,183,255,0.12);
+}
+
+/* Light-mode rim override: use a warm gold rim for better contrast */
+.light-mode .mini-card::after, .light-mode .quick-action-item::after, .light-mode .card-btn::after, .light-mode .mini-icon::after, .light-mode .feature-image::after{
+  --rim: rgba(210,160,30,0.85);
+  box-shadow: 0 0 0 2px var(--rim), 0 8px 20px rgba(210,160,30,0.06);
+}
+
+
+/* Prominent site header for mobile-first design */
+.site-header{ display:flex; align-items:center; justify-content:space-between; padding:16px; max-width:1100px; margin:16px auto 8px auto }
+.branding-big{ font-size:22px; font-weight:800; letter-spacing:1px }
+/* small muted credit line in the header */
+.header-credit{ font-size:0.72rem; color:var(--muted); margin-top:6px; opacity:0.95 }
+
+/* Premium page title */
+.title{ font-family: Georgia, 'Times New Roman', serif; font-size:36px; text-align:center; margin:18px 0; color:#fff; letter-spacing:1px; text-shadow: 0 6px 18px rgba(0,0,0,0.6) }
+
+/* Make the glass-card center and feel premium on content pages */
+.mobile-container .glass-card{ max-width:760px; margin: 18px auto; padding:22px 24px; border-radius:22px; background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04)); box-shadow: 0 30px 80px rgba(2,12,24,0.7) }
+
+/* Layout form controls in the header of the card */
+.glass-card > div:first-child{ display:flex; gap:12px; align-items:center; justify-content:center; flex-wrap:wrap; margin-bottom:12px }
+.glass-card label{ color:var(--muted); margin-right:6px; font-weight:600 }
+.glass-card select, .glass-card input[type="checkbox"]{ padding:6px 8px; border-radius:8px; border:1px solid rgba(255,255,255,0.06); background: rgba(0,0,0,0.18); color: #f3fbff }
+
+/* Generic .glass form controls: used on quiz/other content pages */
+.glass{ display:block }
+.glass input[type="text"], .glass input[type="email"], .glass textarea, .glass select{ width:100%; padding:10px 12px; border-radius:10px; border:1px solid rgba(255,255,255,0.08); background: rgba(0,0,0,0.14); color: #eaf6ff; box-shadow: inset 0 1px 0 rgba(255,255,255,0.02); }
+.glass input::placeholder, .glass textarea::placeholder{ color: rgba(234,246,255,0.6) }
+.glass button{ padding:10px 14px; border-radius:10px; border:none; background:linear-gradient(180deg,var(--accent), #1aa9ff); color:#041726; font-weight:700 }
+
+/* Light mode overrides for .glass form controls */
+.light-mode .glass input[type="text"], .light-mode .glass input[type="email"], .light-mode .glass textarea, .light-mode .glass select{ background:#fff; color:#08101a; border:1px solid rgba(8,12,20,0.08); box-shadow: none }
+.light-mode .glass input::placeholder, .light-mode .glass textarea::placeholder{ color: rgba(8,12,20,0.45) }
+.light-mode .glass button{ background: linear-gradient(180deg,#2b7fd6,#1a66b0); color:#fff }
+
+/* Button layout improvements: center items and set consistent min width */
+.sign-btn-grid{ justify-items:center }
+.sign-btn{ min-width:130px; display:inline-flex; align-items:center; justify-content:center }
+.sign-icon{ width:36px; height:36px; margin-right:12px; background: rgba(255,255,255,0.9); border-radius:8px; display:inline-flex; align-items:center; justify-content:center; box-shadow: 0 6px 18px rgba(0,0,0,0.35) }
+.sign-btn--secondary .sign-icon{ background: rgba(255,255,255,0.95) }
+
+/* Make Uniform button centered on its own row if needed */
+.sign-btn-grid button:last-child{ grid-column: 2 / span 1 }
+
+/* Header pro-centred layout */
+.header-pro{ display:flex; align-items:center; justify-content:space-between; gap:12px; padding:18px; max-width:1100px; margin:8px auto }
+.header-pro .header-center{ text-align:center; flex:1 }
+.header-pro .header-left, .header-pro .header-right{ width:120px; display:flex; align-items:center; justify-content:center }
+
+/* Header colors - explicit for clarity */
+.header-pro .branding-big{ color: #ffffff; text-shadow: 0 6px 14px rgba(2,6,12,0.6) }
+.header-pro .header-credit{ color: rgba(233,246,255,0.9); font-size:0.9rem; line-height:1.1 }
+
+/* Theme toggle button (light mode trigger) */
+.theme-toggle{ background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02)); border:1px solid rgba(255,255,255,0.06); padding:8px 12px; border-radius:18px; display:inline-flex; gap:8px; align-items:center; color:var(--muted); cursor:pointer; box-shadow: 0 8px 20px rgba(0,0,0,0.45); transition: transform 260ms ease, background 220ms ease }
+.theme-toggle .toggle-ico{ display:inline-block; width:22px; height:22px; text-align:center }
+.theme-toggle:hover{ transform: translateY(-4px) }
+
+/* animate toggle when active */
+.theme-toggle.active{ background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(240,240,240,0.95)); color:#111 }
+.theme-toggle.active .toggle-ico{ transform: rotate(360deg); transition: transform 520ms cubic-bezier(.2,.9,.2,1) }
+
+/* Light mode overrides */
+.light-mode{ --bg1: #ffffff; --bg2: #f6f8fb; --card: rgba(0,0,0,0.04); --card-strong: rgba(0,0,0,0.06); --accent: #2b7fd6; --muted: rgba(8,12,20,0.6); color: #08101a }
+/* Make the overall page background plain/light (remove heavy image overlay) */
+.light-mode body.theme-bg, .light-mode body.gesture-bg, .light-mode .mobile-container{ background-image: none !important; background: linear-gradient(180deg, var(--bg1), var(--bg2)) !important; color: #08101a }
+
+/* Cards: switch to light surfaces with subtle borders and drop shadows */
+.light-mode .glass-card{ background: linear-gradient(180deg, #ffffff, #fbfdff); box-shadow: 0 10px 30px rgba(10,20,30,0.06); border: 1px solid rgba(8,12,20,0.06); color: #08101a }
+.light-mode .glass-card::before{ opacity:0.06; filter: blur(6px) saturate(90%); background: conic-gradient(from 0deg, rgba(0,0,0,0.03), rgba(43,127,214,0.12), rgba(0,0,0,0.02), rgba(43,127,214,0.08)); box-shadow: 0 6px 18px rgba(43,127,214,0.04) }
+.light-mode .glass-card::after{ background: linear-gradient(120deg, rgba(0,0,0,0.02), rgba(0,0,0,0.01)); mix-blend-mode: normal; opacity:0.6 }
+
+/* Muted text becomes dark-gray */
+.light-mode .muted, .light-mode .muted-text, .light-mode .mini-title, .light-mode .model-title, .light-mode .read-more{ color: rgba(8,12,20,0.6) }
+
+/* Mini-cards and tiles: lighter backgrounds */
+.light-mode .mini-card{ background: linear-gradient(180deg, #ffffff, #fbfbfd) }
+
+/* Hero big overlay: remove dark overlay so image sits on light background */
+.light-mode .hero-big{ background: linear-gradient(180deg, #f7f9fc, #ffffff) }
+.light-mode .hero-big::after{ background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02)); }
+
+/* Buttons invert to dark text on light surfaces where needed */
+.light-mode .sign-btn{ box-shadow: 0 10px 30px rgba(18,22,26,0.06) }
+.light-mode .sign-btn--primary{ color:#2b2b1a }
+.light-mode .sign-btn--secondary{ color:#071e35 }
+
+/* Footer: light surface with darker icons/labels */
+.light-mode .bottom-nav{ background: rgba(255,255,255,0.95); box-shadow: 0 10px 30px rgba(10,20,30,0.06) }
+.light-mode .bottom-nav a, .light-mode .bottom-nav.pro .nav-item{ color: #0b2130 }
+.light-mode .bottom-nav.pro .nav-ico{ background: rgba(10,20,30,0.04) }
+
+/* Theme toggle active state shows moon-to-sun */
+.light-mode .theme-toggle{ background: linear-gradient(180deg,#fff,#f4f6f9); color:#072 }
+.light-mode .header-pro .branding-big{ color: #08101a; text-shadow: none }
+.light-mode .header-pro .header-credit{ color: rgba(8,12,20,0.6) }
+
+/* Ensure the site branding (CHIROVOX) is visible on light backgrounds
+   Some pages use .branding .title while others use .branding-big — cover both. */
+.light-mode .branding .title,
+.light-mode .branding-big { color: #08101a !important; text-shadow: none !important; }
+.light-mode .branding .subtitle { color: rgba(8,12,20,0.75) !important; }
+
+/* Ensure page titles (like "Learn Sri Lankan Sign Language") are visible in light mode.
+   The .title class is used across multiple pages including education, dictionary, etc. */
+.light-mode .title,
+.light-mode h1,
+.light-mode h2,
+.light-mode h3,
+.light-mode h4 { color: #08101a !important; text-shadow: none !important; }/* Light-mode artwork: show the white CHIROVOX artwork as a subtle blurred background
+   across pages when the site is in light-mode. This uses a fixed pseudo-element so it
+   doesn't affect document flow and remains behind the content (which uses z-index:1). */
+.light-mode body::before{
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: url('../assets/images/CHIROVOXWHITE.png');
+  background-repeat: no-repeat;
+  background-position: right 6% center;
+  background-size: 560px auto;
+  /* make the artwork more visible in light mode */
+  opacity: 0.24; /* stronger presence */
+  filter: blur(3px) saturate(1.06) contrast(1.0);
+  transform: scale(1);
+  transition: opacity 420ms ease, transform 420ms ease, filter 420ms ease;
+  z-index: 0;
+}
+
+@media (max-width:480px){
+  .light-mode body::before{
+    background-position: center center;
+    background-size: cover;
+    opacity: 0.16;
+    filter: blur(4px) saturate(1.02) contrast(1.0);
+  }
+}
+
+/* Floating global theme toggle for pages without header toggle */
+.global-theme-toggle{ position:fixed; right:18px; bottom:88px; z-index:120; border-radius:18px; padding:10px 12px; box-shadow: 0 12px 36px rgba(2,8,20,0.45) }
+.global-theme-toggle .toggle-label{ display:none }
+@media (min-width:680px){ .global-theme-toggle .toggle-label{ display:inline-block; margin-left:8px } }
+
+/* Premium language selector */
+.lang-select-global{ appearance:none; -webkit-appearance:none; -moz-appearance:none; padding:8px 12px; border-radius:14px; border:none; background: linear-gradient(180deg, #ffd166, #d79b00); color:#1b1200; font-weight:700; box-shadow: 0 10px 30px rgba(23,9,0,0.45); cursor:pointer }
+.lang-select-global:focus{ outline:3px solid rgba(255,210,90,0.22); outline-offset:4px }
+.lang-select-wrap{ display:inline-flex; gap:8px; align-items:center }
+
+
+
+/* Quick action image grid */
+.quick-actions{ display:grid; grid-template-columns: repeat(3,1fr); gap:8px; margin-top:10px }
+.quick-action-item{ display:flex; flex-direction:column; align-items:center; text-decoration:none; color:inherit; padding:8px; border-radius:10px; background: rgba(255,255,255,0.02); }
+.quick-action-item img{ width:48px; height:48px; object-fit:cover; border-radius:8px; margin-bottom:6px }
+.quick-action-item span{ font-size:0.85rem; color:var(--muted) }
+
+/* Glass-styled table for dictionary pages */
+.glass-table{ background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02)); padding:14px; border-radius:12px; border:1px solid rgba(255,255,255,0.06); box-shadow: 0 10px 30px rgba(0,0,0,0.5); margin-bottom:12px }
+.glass-table table{ width:100%; border-collapse:collapse; color:inherit; }
+.glass-table th, .glass-table td{ border:1px solid rgba(255,255,255,0.08); padding:10px 12px; text-align:left; vertical-align:middle }
+.glass-table thead th{ background: rgba(255,255,255,0.03); font-weight:700 }
+
+/* Light-mode table adjustments */
+.light-mode .glass-table{ background: linear-gradient(180deg,#ffffff,#fbfdff); border:1px solid rgba(8,12,20,0.06); box-shadow: 0 8px 20px rgba(10,20,30,0.06) }
+.light-mode .glass-table th, .light-mode .glass-table td{ border-color: rgba(8,12,20,0.06); color: rgba(8,12,20,0.88) }
+.light-mode .glass-table thead th{ background: rgba(8,12,20,0.03) }
+
+/* Right column (mini cards) */
+.mini-card{ margin-bottom:12px }
+.mini-card .read-more{ margin-top:8px; display:inline-block; padding:6px 10px; border-radius:12px; background:rgba(255,255,255,0.03); color:var(--muted); text-decoration:none }
+
+/* Camera page orb */
+.orb-screen{ display:flex; flex-direction:column; align-items:center; justify-content:center; height:78vh; text-align:center; padding:24px }
+.orb {
+  width:220px; height:220px; border-radius:50%; background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+  box-shadow: 0 20px 50px rgba(0,0,0,0.6), inset 0 2px 12px rgba(255,255,255,0.02);
+  display:flex; align-items:center; justify-content:center; margin:18px 0;
+  position:relative;
+}
+.orb::after{ content:''; position:absolute; inset:6px; border-radius:50%; background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent); }
+.orb-anim{ width:140px; height:140px; border-radius:50%; background:linear-gradient(60deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03)); filter:blur(6px); animation: floaty 6s ease-in-out infinite;}
+@keyframes floaty{ 0%{transform:translateY(0) scale(1)}50%{transform:translateY(-8px) scale(1.03)}100%{transform:translateY(0) scale(1)} }
+
+.mic-btn{ width:88px; height:88px; border-radius:50%; background:linear-gradient(180deg,var(--accent), #1aa9ff); display:flex; align-items:center; justify-content:center; color:#002; font-size:28px; box-shadow:0 10px 30px rgba(0,0,0,0.6); border: 4px solid rgba(255,255,255,0.06); }
+.small-action{ background:var(--card); padding:8px 12px; border-radius:14px; color:var(--muted); }
+
+.action-row{ display:flex; gap:8px; margin-top:8px }
+
+.muted-text{ color: rgba(255,255,255,0.7); }
+.spacer-18{ height:18px }
+.hidden{ display:none !important }
+
+/* Quick sign buttons (schools page) */
+.sign-btn-grid{ margin-top:1rem; display:grid; grid-template-columns: repeat(3, 1fr); gap:0.75rem }
+.sign-btn{ background: linear-gradient(180deg, #d4a90a, #b77d00); color: #0a0a05; border: 1px solid rgba(255,255,255,0.08); padding:18px 12px; border-radius:16px; font-weight:800; font-size:1.06rem; box-shadow: 0 14px 40px rgba(23,9,0,0.6), inset 0 1px 0 rgba(255,255,255,0.06); transition: transform 180ms cubic-bezier(.2,.9,.2,1), box-shadow 180ms ease, background 160ms ease; cursor:pointer; text-align:center }
+.sign-btn:active{ transform: translateY(3px) scale(0.995); box-shadow: 0 8px 20px rgba(16,8,0,0.55) }
+.sign-btn:hover{ transform: translateY(-6px); box-shadow: 0 26px 60px rgba(19,9,0,0.65); background: linear-gradient(180deg, #ffd166, #d79b00) }
+.sign-btn:focus{ outline:3px solid rgba(255,210,90,0.22); outline-offset:4px }
+.sign-btn small{ display:block; font-size:0.78rem; color:rgba(10,10,6,0.7); margin-top:6px }
+/* Button variants */
+.sign-btn--primary{ background: linear-gradient(180deg, #ffd166, #d79b00); color:#1a1200 }
+.sign-btn--secondary{ background: linear-gradient(180deg, #3aa0ff, #006fd6); color:#04172a; box-shadow: 0 12px 30px rgba(2,42,80,0.45), inset 0 1px 0 rgba(255,255,255,0.03) }
+
+/* Icon inside button */
+.sign-icon{ display:inline-flex; align-items:center; justify-content:center; width:34px; height:34px; font-size:18px; margin-right:10px; border-radius:8px }
+.sign-label{ vertical-align:middle }
+
+/* Responsive columns for the quick-button grid */
+@media (max-width:480px){
+  .sign-btn-grid{ grid-template-columns: repeat(2,1fr); gap:0.5rem }
+  .sign-btn{ padding:14px 10px; font-size:0.96rem }
+}
+@media (min-width:900px){
+  .sign-btn-grid{ grid-template-columns: repeat(4,1fr); gap:1rem }
+}
+
+.bottom-nav{ position:fixed !important; bottom:18px; left:50%; transform:translateX(-50%); background:rgba(0,0,0,0.72); padding:10px 18px; border-radius:30px; display:flex; gap:18px; box-shadow:0 8px 30px rgba(0,0,0,0.6); z-index:9999; transition: transform 220ms ease, opacity 220ms ease }
+.bottom-nav a{ color: #e9f6ff; font-size:20px; text-decoration:none }
+
+/* Pro footer with icons + labels */
+.bottom-nav.pro{ padding:10px 20px; border-radius:18px; background: linear-gradient(180deg, rgba(0,0,0,0.6), rgba(6,10,18,0.45)); gap:14px; }
+.bottom-nav.pro .nav-item{ display:flex; align-items:center; gap:8px; padding:8px 12px; border-radius:12px; text-decoration:none; color:#eaf6ff; background: transparent }
+.bottom-nav.pro .nav-item:hover{ background: rgba(255,255,255,0.03); transform: translateY(-4px); box-shadow: 0 10px 30px rgba(0,0,0,0.5) }
+.bottom-nav.pro .nav-ico{ display:inline-flex; width:34px; height:34px; align-items:center; justify-content:center; background: rgba(255,255,255,0.06); border-radius:8px }
+.bottom-nav.pro .nav-label{ font-size:0.92rem; color:var(--muted); font-weight:700 }
+
+/* Compact footer: minimize space on very small screens */
+@media (max-width:420px){
+  .bottom-nav{ left:12px; transform:none; right:12px; border-radius:12px; padding:8px 12px; }
+  .bottom-nav.pro .nav-label{ display:none }
+}
+
+@media (max-width:900px){
+  .app-shell{ grid-template-columns: 1fr; padding:12px }
+  .right-col{ order:-1 }
+}
+
+/* Mobile-specific look: use CHIROVOX image as full-screen background and stack cards for a clean mobile UI
+   Assumption: use assets/images/CHIROVOX.png as the background image for mobile. If you meant a different file, tell me. */
+@media (max-width:480px){
+  body.theme-bg, body.gesture-bg {
+    /* background image sits under a stronger dark gradient on mobile for better readability */
+    background-image: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.72)), url('../assets/images/CHIROVOX.png');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+
+  /* Make the app shell fill the viewport height and give cards a floating feel */
+  .mobile-container{ max-width:420px; margin:8px auto; padding:16px }
+  /* Hide the desktop app shell on small screens to avoid duplicate content */
+  .app-shell{ display:none }
+  .mobile-top{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:12px }
+  .branding-big{ font-size:26px; font-weight:900; letter-spacing:1px }
+  .personal-pill{ background:rgba(255,255,255,0.06); padding:6px 10px; border-radius:16px; color:var(--muted); font-weight:600 }
+
+  /* Hero card (Start Chat) */
+  .hero-card{ display:flex; gap:12px; align-items:center; justify-content:space-between; padding:18px; border-radius:18px; background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02)); }
+  .hero-left{ flex:1 }
+  .hero-left h2{ margin:0 0 6px 0; font-size:20px }
+  .hero-left .muted{ margin:0 0 12px 0 }
+  .hero-actions{ display:flex; gap:8px }
+  .pill{ background:rgba(255,255,255,0.06); padding:8px 12px; border-radius:20px; color:var(--muted); text-decoration:none; font-weight:700 }
+  .hero-right img{ width:86px; height:86px; object-fit:cover; border-radius:12px }
+
+  /* New hero-row (attachment style) */
+  .hero-row{ display:flex; gap:14px; align-items:flex-start }
+  .hero-main{ flex:1; display:flex; align-items:center; justify-content:space-between; padding:18px; border-radius:20px; height:232px; box-sizing:border-box }
+  .hero-main-body{ padding-right:10px }
+  .start-label{ font-size:20px; font-weight:900 }
+  .hero-main-image img{ width:110px; height:110px; object-fit:cover; border-radius:14px }
+
+  .hero-side{ width:110px; display:flex; flex-direction:column; gap:12px; height: calc(110px * 2 + 12px); box-sizing:border-box }
+  .mini-action{ display:flex; flex-direction:column; align-items:center; justify-content:center; padding:14px; border-radius:20px; text-align:center; position:relative; height:110px; box-sizing:border-box }
+  .mini-icon{ font-size:24px; margin-bottom:8px }
+  .mini-icon img{ width:44px; height:44px; object-fit:cover; border-radius:8px }
+  .mini-label{ font-size:15px; color:var(--muted); line-height:1.05; margin-top:6px }
+  .action-badge{ position:absolute; right:8px; top:8px; width:18px; height:18px; border-radius:50%; background:rgba(0,0,0,0.6) }
+
+  /* Large panel to the right of the mini-action stack */
+  /* ensure the big hero panel image fills the whole rounded rectangle */
+  .hero-big{ flex:1; margin-left:12px; height: calc(110px * 2 + 12px); border-radius:18px; overflow:hidden; display:block; background: linear-gradient(180deg, rgba(0,0,0,0.08), rgba(0,0,0,0.04)); position:relative; box-sizing:border-box; padding:0 }
+  .hero-big-inner{ position:absolute; inset:0; width:100%; height:100%; }
+  /* make the CHIROVOX image fill the panel exactly */
+  .hero-big-img{ width:100%; height:100%; object-fit:cover; opacity:1; display:block; filter: brightness(1.08) saturate(1.12); }
+  /* subtle overlay to keep text legible while allowing the image's true colors through */
+  .hero-big::after{ content:''; position:absolute; inset:0; background: linear-gradient(180deg, rgba(0,0,0,0.06), rgba(0,0,0,0.02)); pointer-events:none }
+
+  /* Responsive: on narrow screens stack the side cards under the hero (but keep the look similar to mock when possible) */
+  @media (max-width:360px){
+    .hero-row{ flex-direction:column }
+    .hero-side{ width:100%; flex-direction:row; justify-content:space-between; height:auto }
+    .mini-action{ flex:1; margin:0 4px; height:auto }
+    .hero-main{ height:auto }
+  }
+
+  /* Model card */
+  .model-card{ display:flex; align-items:center; justify-content:space-between; padding:14px; border-radius:16px; margin-top:12px }
+  .model-title{ font-size:18px }
+  .read-more{ padding:8px 12px; border-radius:12px; background:rgba(255,255,255,0.04); text-decoration:none; color:var(--muted) }
+
+  /* Utilities / small rows */
+  .utilities{ margin-top:12px; padding:12px }
+  .util-row{ display:flex; gap:10px; align-items:center; margin-bottom:10px }
+  .util-btn{ width:46px; height:46px; border-radius:50%; display:flex; align-items:center; justify-content:center; background:rgba(255,255,255,0.04); text-decoration:none }
+
+  /* Six mini cards grid to match attachment */
+  .mini-grid{ display:grid; grid-template-columns: repeat(3,1fr); gap:12px; margin-top:14px }
+  .mini-card{ display:flex; flex-direction:column; align-items:center; justify-content:flex-end; background: linear-gradient(180deg, rgba(0,0,0,0.7), rgba(10,10,10,0.65)); padding:12px; border-radius:18px; position:relative; text-decoration:none; color:inherit; min-height:110px }
+  .mini-card img{ width:54px; height:54px; object-fit:cover; border-radius:8px; margin-bottom:8px }
+  .mini-title{ font-size:14px; margin-bottom:6px; color:var(--muted); text-align:center }
+  .mini-badge{ position:absolute; right:10px; top:8px; width:16px; height:16px; border-radius:50%; background: linear-gradient(180deg, rgba(10,120,140,0.9), rgba(10,80,110,0.85)); box-shadow: 0 4px 12px rgba(10,180,220,0.18) }
+
+  /* Tiles become 2 columns on very small screens */
+  .home-tiles{ grid-template-columns: repeat(2,1fr); gap:8px }
+  .card-btn{ min-height:78px; padding:10px }
+
+  /* Mini-cards compress and center */
+  .right-col .glass-card{ margin-bottom:10px }
+
+  /* Footer nav stays compact and slightly inset */
+  .bottom-nav{ bottom:12px; padding:8px 14px }
+
+  /* Ensure hidden elements remain hidden on mobile */
+  .hidden{ display:none !important }
+}

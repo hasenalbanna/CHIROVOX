@@ -1,0 +1,15 @@
+import tensorflow as tf
+from tensorflow import keras
+import tensorflowjs as tfjs
+
+# Example: build & train a model
+model = keras.Sequential([
+    keras.layers.Flatten(input_shape=(64, 64, 3)),
+    keras.layers.Dense(128, activation='relu'),
+    keras.layers.Dense(8, activation='softmax')   # 8 gestures
+])
+model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+# model.fit(train_images, train_labels, epochs=10)  # train on your dataset
+
+# Save as TensorFlow.js format
+tfjs.converters.save_keras_model(model, "model")

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz - CHIROVOX</title>
+  <link rel="stylesheet" href="quiz.css">
+  <link rel="stylesheet" href="../css/theme.css">
+  <style>
+    /* Premium page styling for quiz */
+    main{max-width:800px;margin:0 auto;padding:20px}
+    .title{text-align:center;margin-bottom:30px}
+  </style>
+</head>
+<body class="quiz-bg theme-bg">
+
+  <main>
+    <h2 class="title">Sign Language Quiz</h2>
+
+    <!-- Quick Buttons: common classroom phrases in multiple languages -->
+    <section class="glass" id="quick-buttons-section">
+      <h3>Quick Phrases</h3>
+      <p class="muted">Tap a button to speak the phrase. Change language from the site header to switch labels.</p>
+      <div id="quick-buttons" class="quick-buttons-grid" aria-live="polite"></div>
+    </section>
+
+    <!-- Step 1: Name input -->
+    <section class="glass" id="name-section">
+      <h3>Enter Your Full Name</h3>
+      <input type="text" id="username" placeholder="Full Name">
+      <button id="start-btn">Start Quiz</button>
+    </section>
+
+    <!-- Step 2: Quiz questions -->
+  <section class="glass hidden" id="quiz-section">
+      <div id="quiz-container"></div>
+      <button id="submit-btn">Submit Quiz</button>
+    </section>
+
+    <!-- Step 3: Results -->
+  <section class="glass hidden" id="result-section">
+      <h3 id="score"></h3>
+      <p id="certificate-msg"></p>
+  <canvas id="certificate-canvas" class="hidden"></canvas>
+    </section>
+
+  </main>
+
+  <footer class="bottom-nav">
+    <a href="../index.html">🏠</a>
+    <a href="gesture/gesture.html">📷</a>
+    <a href="../education.html">📘</a>
+    <a href="../dictionary.html">📖</a>
+    <a href="schools.html">🏫</a>
+    <a href="quiz.html">📝</a>
+  </footer>
+
+  <script src="quiz.js"></script>
+  <script src="../js/footer.js"></script>
+</body>
+</html>

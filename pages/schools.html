@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>School Signs - CHIROVOX</title>
+  <link rel="stylesheet" href="../css/style.css?v=1.1">
+  <link rel="stylesheet" href="../css/theme.css">
+  <style>
+    /* Premium page styling for schools */
+    .mobile-container{max-width:900px;margin:0 auto;padding:20px}
+    .title{text-align:center;margin-bottom:30px}
+    .glass-card > div:first-child{display:flex;gap:12px;align-items:center;justify-content:center;flex-wrap:wrap;padding:10px}
+    .glass-card label{font-size:13px;font-weight:600;color:var(--muted);margin:0}
+    .glass-card select{padding:6px 10px}
+  </style>
+</head>
+<body class="education-bg theme-bg">
+
+<main class="mobile-container">
+  <h2 class="title">School Signs - Quick Speak</h2>
+
+  <section class="glass-card">
+    <div>
+      <label for="language">Language:</label>
+      <select id="language">
+        <option value="en">English</option>
+        <option value="si">සිංහල</option>
+        <option value="ta">தமிழ்</option>
+      </select>
+
+      <label for="gender">Voice:</label>
+      <select id="gender">
+        <option value="female">Female</option>
+        <option value="male">Male</option>
+      </select>
+
+      <label for="useServerTTS">Use server TTS</label>
+      <input type="checkbox" id="useServerTTS">
+    </div>
+
+  <div id="buttons" class="sign-btn-grid">
+      <!-- Quick school-related sign buttons -->
+  <button class="sign-btn sign-btn--primary" data-word="School"><span class="sign-icon">🏫</span><span class="sign-label">School</span></button>
+  <button class="sign-btn sign-btn--secondary" data-word="Teacher"><span class="sign-icon">👩‍🏫</span><span class="sign-label">Teacher</span></button>
+  <button class="sign-btn sign-btn--primary" data-word="Student"><span class="sign-icon">🧑‍🎓</span><span class="sign-label">Student</span></button>
+  <button class="sign-btn sign-btn--secondary" data-word="Class"><span class="sign-icon">🏷️</span><span class="sign-label">Class</span></button>
+  <button class="sign-btn sign-btn--primary" data-word="Book"><span class="sign-icon">📚</span><span class="sign-label">Book</span></button>
+  <button class="sign-btn sign-btn--secondary" data-word="Pencil"><span class="sign-icon">✏️</span><span class="sign-label">Pencil</span></button>
+  <button class="sign-btn sign-btn--primary" data-word="Exam"><span class="sign-icon">📝</span><span class="sign-label">Exam</span></button>
+  <button class="sign-btn sign-btn--secondary" data-word="Homework"><span class="sign-icon">📎</span><span class="sign-label">Homework</span></button>
+  <button class="sign-btn sign-btn--primary" data-word="Library"><span class="sign-icon">📖</span><span class="sign-label">Library</span></button>
+  <button class="sign-btn sign-btn--secondary" data-word="Playground"><span class="sign-icon">🏀</span><span class="sign-label">Playground</span></button>
+  <button class="sign-btn sign-btn--primary" data-word="Cafeteria"><span class="sign-icon">🍽️</span><span class="sign-label">Cafeteria</span></button>
+  <button class="sign-btn sign-btn--secondary" data-word="Principal"><span class="sign-icon">👔</span><span class="sign-label">Principal</span></button>
+  <button class="sign-btn sign-btn--primary" data-word="Nurse"><span class="sign-icon">🩺</span><span class="sign-label">Nurse</span></button>
+  <button class="sign-btn sign-btn--secondary" data-word="Recess"><span class="sign-icon">⏰</span><span class="sign-label">Recess</span></button>
+  <button class="sign-btn sign-btn--primary" data-word="Bell"><span class="sign-icon">🔔</span><span class="sign-label">Bell</span></button>
+  <button class="sign-btn sign-btn--secondary" data-word="Desk"><span class="sign-icon">🪑</span><span class="sign-label">Desk</span></button>
+  <button class="sign-btn sign-btn--primary" data-word="Chair"><span class="sign-icon">💺</span><span class="sign-label">Chair</span></button>
+  <button class="sign-btn sign-btn--secondary" data-word="Blackboard"><span class="sign-icon">🧾</span><span class="sign-label">Blackboard</span></button>
+  <button class="sign-btn sign-btn--primary" data-word="Locker"><span class="sign-icon">🗄️</span><span class="sign-label">Locker</span></button>
+  <button class="sign-btn sign-btn--secondary" data-word="Uniform"><span class="sign-icon">👕</span><span class="sign-label">Uniform</span></button>
+    </div>
+
+  </section>
+</main>
+
+<footer class="bottom-nav">
+  <a href="../index.html">🏠</a>
+  <a href="gesture/gesture.html">📷</a>
+  <a href="../education.html">📘</a>
+  <a href="../dictionary.html">📖</a>
+  <a href="schools.html">🏫</a>
+  <a href="quiz.html">📝</a>
+</footer>
+
+<script src="schools.js"></script>
+<script src="../js/footer.js"></script>
+</body>
+</html>
